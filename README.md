@@ -153,3 +153,7 @@ Na raiz do projeto tem uma collection para importar no Postman com todos os endp
 -   **Method:** DELETE
 -   **URL:** http://127.0.0.1:8000/api/tasks/12
 -   **Authorization:** Bearer Token
+
+
+link para o projeto frontend: https://github.com/taylormoreira1/frontend-react-api-tasks
+```
