@@ -1,0 +1,47 @@
+version: "2.20"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: docker/php/DockerFile
+    container_name: taylor-app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+    environment:
+      - COMPOSER_HOME=/composer
+      - COMPOSER_ALLOW_SUPERUSER=1
+      - APP_ENV=local
+      - APP_KEY=base64:V9lMOMKFhL7IdZ9/3KcjtT24SIqRw+Oz7ObmYy9YvJQ=
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.25.1-alpine-slim
+    container_name: taylor-nginx
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/
+      - ./docker/nginx:/etc/nginx/conf.d
+
+
+  db:
+    container_name: taylor-db
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=default
+      - MYSQL_USER=laravel
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  redis:
+  db:
