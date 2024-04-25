@@ -32,7 +32,7 @@ class AuthController extends Controller
             return $this->createNewToken($token);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return response()->json(['error' => 'Credenciais inválidas!'], 401);
     }
 
     /**
@@ -64,7 +64,7 @@ class AuthController extends Controller
     {
         auth('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out.']);
+        return response()->json(['message' => 'Desconectado com sucesso.']);
     }
 
     /**
